@@ -1,0 +1,1181 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Chicago</title>
+	<style>
+		body,html {
+			height: 100%;
+			background-color: black;
+			margin: 0;
+			color: white;
+			text-align: center;
+		}
+
+		.bg {
+	    height: 100%;
+	    position: relative;
+	    background: url("giphy.gif") no-repeat center center fixed; 
+	    -webkit-background-size: cover;
+	    -moz-background-size: cover;
+	    -o-background-size: cover;
+	    background-size: cover;
+		}
+
+		.name {
+			opacity: 1;
+			z-index: 10;
+			width: 100%;
+		  height: 100%;
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		}
+
+		.head {
+			background-color: white;
+			color: #ACDFF1;
+			border-style: inset;
+			font-weight:bold;
+			font-size: 24px;
+		}
+
+		.box {
+			margin: 10vh;
+			font-size: 20px;
+			background-color: #599ab2;
+			border-style: inset;
+		}
+	</style>
+
+	<script>
+		// autoplay loop
+		var PeopleAudio;
+		var GunAudio;
+		var PeopleVol = 1;
+		var GunVol = 0;
+		var frontSource;
+		var backSource;
+		var frontO = 1;
+		var pos = 0;
+
+		var names = [
+		  {
+		    "Name": "Clancy Beasley"
+		  },
+		  {
+		    "Name": "Jesus Mendiola"
+		  },
+		  {
+		    "Name": "Deandre V. Smith"
+		  },
+		  {
+		    "Name": "Christopher Johnson"
+		  },
+		  {
+		    "Name": "Charles Irving-Smith Jr."
+		  },
+		  {
+		    "Name": "Ahmadd Smith"
+		  },
+		  {
+		    "Name": "Gene Gordon"
+		  },
+		  {
+		    "Name": "Sherrod Rhyme"
+		  },
+		  {
+		    "Name": "Nicholas Smith"
+		  },
+		  {
+		    "Name": "Deshawn Boswell"
+		  },
+		  {
+		    "Name": "Mishawn Green"
+		  },
+		  {
+		    "Name": "Dario Balderrama"
+		  },
+		  {
+		    "Name": "Jazebel Aleman"
+		  },
+		  {
+		    "Name": "Jaquarius Davis"
+		  },
+		  {
+		    "Name": "Christian Fulgham"
+		  },
+		  {
+		    "Name": "Johnnie Ervin"
+		  },
+		  {
+		    "Name": "Tiara Viramontes"
+		  },
+		  {
+		    "Name": "Raven Lemons"
+		  },
+		  {
+		    "Name": "Shirley Ervin"
+		  },
+		  {
+		    "Name": "Joseph Henderson"
+		  },
+		  {
+		    "Name": "Deandre Robinson"
+		  },
+		  {
+		    "Name": "Antwon High Jr."
+		  },
+		  {
+		    "Name": "Chris Williams"
+		  },
+		  {
+		    "Name": "Duan Armfield"
+		  },
+		  {
+		    "Name": "Lisa Fisher"
+		  },
+		  {
+		    "Name": "Catherine Saterfield-Buchanan"
+		  },
+		  {
+		    "Name": "Deangelo Pleasant"
+		  },
+		  {
+		    "Name": "Ira Johnson"
+		  },
+		  {
+		    "Name": "Hakeem Howard"
+		  },
+		  {
+		    "Name": "Maurice Purnell"
+		  },
+		  {
+		    "Name": "Andre Baker"
+		  },
+		  {
+		    "Name": "Alfredo Loza"
+		  },
+		  {
+		    "Name": "David Hobson Jr."
+		  },
+		  {
+		    "Name": "Deshawn Martin"
+		  },
+		  {
+		    "Name": "Romeo Edwards"
+		  },
+		  {
+		    "Name": "Arthur McGraw"
+		  },
+		  {
+		    "Name": "Anton Jackson"
+		  },
+		  {
+		    "Name": "Benjamin Herron"
+		  },
+		  {
+		    "Name": "Jaruad Ford"
+		  },
+		  {
+		    "Name": "Sammy McGowan"
+		  },
+		  {
+		    "Name": "Curtis S. Posey"
+		  },
+		  {
+		    "Name": "Jose Mendoza"
+		  },
+		  {
+		    "Name": "Melvin Howard Jr."
+		  },
+		  {
+		    "Name": "Arteco Rhodes"
+		  },
+		  {
+		    "Name": "Ernie Gardner"
+		  },
+		  {
+		    "Name": "Jeanine Dowell"
+		  },
+		  {
+		    "Name": "Juliet V. Washington"
+		  },
+		  {
+		    "Name": "Alfonso Toro Jr."
+		  },
+		  {
+		    "Name": "Javon Jackson"
+		  },
+		  {
+		    "Name": "Sedrick Ringer"
+		  },
+		  {
+		    "Name": "John Hunter"
+		  },
+		  {
+		    "Name": "Gloria Aguilar"
+		  },
+		  {
+		    "Name": "Quentica Locke"
+		  },
+		  {
+		    "Name": "Robert Cooley"
+		  },
+		  {
+		    "Name": "Jermaine Blandin"
+		  },
+		  {
+		    "Name": "Arthur L. Smith"
+		  },
+		  {
+		    "Name": "Aaron Gordon"
+		  },
+		  {
+		    "Name": "Tyrone Burdine"
+		  },
+		  {
+		    "Name": "Devonte Morgan"
+		  },
+		  {
+		    "Name": "Jerame E. Moore"
+		  },
+		  {
+		    "Name": "Shedrick J. McPherson Jr."
+		  },
+		  {
+		    "Name": "Maurice Anthony Willis"
+		  },
+		  {
+		    "Name": "Derwin Moore"
+		  },
+		  {
+		    "Name": "Robert Hicks"
+		  },
+		  {
+		    "Name": "Kelvin Harper"
+		  },
+		  {
+		    "Name": "William Moore"
+		  },
+		  {
+		    "Name": "Jonathan Halbert"
+		  },
+		  {
+		    "Name": "Francina Lowery"
+		  },
+		  {
+		    "Name": "Gregory Johnson"
+		  },
+		  {
+		    "Name": "Corvel Brown"
+		  },
+		  {
+		    "Name": "Brayant Alvarez"
+		  },
+		  {
+		    "Name": "Michael Robert Gonzalez"
+		  },
+		  {
+		    "Name": "Cedron Doles"
+		  },
+		  {
+		    "Name": "Shaundel Elizabeth Wimberly"
+		  },
+		  {
+		    "Name": "Norman W. White"
+		  },
+		  {
+		    "Name": "Rhonda Hughes"
+		  },
+		  {
+		    "Name": "James Jefferies"
+		  },
+		  {
+		    "Name": "Robert Warren"
+		  },
+		  {
+		    "Name": "Alejandro Montalvo"
+		  },
+		  {
+		    "Name": "Trebor Williams"
+		  },
+		  {
+		    "Name": "Laquante Smith"
+		  },
+		  {
+		    "Name": "Dautreau Bates"
+		  },
+		  {
+		    "Name": "Derrick Murray"
+		  },
+		  {
+		    "Name": "Gustavo Garcia"
+		  },
+		  {
+		    "Name": "Cercy Robinson"
+		  },
+		  {
+		    "Name": "Maurice Hunter"
+		  },
+		  {
+		    "Name": "Gregory Williams Jr."
+		  },
+		  {
+		    "Name": "David Marin"
+		  },
+		  {
+		    "Name": "Vincent Hubbard"
+		  },
+		  {
+		    "Name": "Dante Neely"
+		  },
+		  {
+		    "Name": "Michael Whitford"
+		  },
+		  {
+		    "Name": "Christopher James Edward Johnson Jr."
+		  },
+		  {
+		    "Name": "Willie E. Cooper II"
+		  },
+		  {
+		    "Name": "Robert Sharpe"
+		  },
+		  {
+		    "Name": "Alexander Gonzales"
+		  },
+		  {
+		    "Name": "Rashaad Crawford"
+		  },
+		  {
+		    "Name": "Michael Ferguson"
+		  },
+		  {
+		    "Name": "Tony Haywood"
+		  },
+		  {
+		    "Name": "Jermaine Robinson"
+		  },
+		  {
+		    "Name": "Stanley Jacoby Mack"
+		  },
+		  {
+		    "Name": "Curtis Sanderbeck"
+		  },
+		  {
+		    "Name": "Michael Peterman"
+		  },
+		  {
+		    "Name": "Marcelle Rey"
+		  },
+		  {
+		    "Name": "LeRoy Moore"
+		  },
+		  {
+		    "Name": "Jaron Jackson"
+		  },
+		  {
+		    "Name": "Izat Morrar"
+		  },
+		  {
+		    "Name": "Brendon Frazier"
+		  },
+		  {
+		    "Name": "Tayvion Demarlos Anthony Roberson"
+		  },
+		  {
+		    "Name": "Damijwan Bonds"
+		  },
+		  {
+		    "Name": "Anthony White"
+		  },
+		  {
+		    "Name": "Michael P. Carter"
+		  },
+		  {
+		    "Name": "Lavondell Noble"
+		  },
+		  {
+		    "Name": "Jessica Kall"
+		  },
+		  {
+		    "Name": "Darius Gavin"
+		  },
+		  {
+		    "Name": "Diego Sandoval"
+		  },
+		  {
+		    "Name": "Dayvy Rivas"
+		  },
+		  {
+		    "Name": "Mauricio Cornejo-Rivas"
+		  },
+		  {
+		    "Name": "Glen Ingram"
+		  },
+		  {
+		    "Name": "Sidney Caldwell"
+		  },
+		  {
+		    "Name": "Zaire Benjamin"
+		  },
+		  {
+		    "Name": "Kenyon Hill"
+		  },
+		  {
+		    "Name": "Trenton Cornell-Duranleau"
+		  },
+		  {
+		    "Name": "Darrell Wilson"
+		  },
+		  {
+		    "Name": "Gregory Jackson"
+		  },
+		  {
+		    "Name": "Eugene Winters"
+		  },
+		  {
+		    "Name": "Richard Harrison"
+		  },
+		  {
+		    "Name": "Dominique Black"
+		  },
+		  {
+		    "Name": "Kennatay Leavell"
+		  },
+		  {
+		    "Name": "Jesus De Lao Jimenez"
+		  },
+		  {
+		    "Name": "Donald L. McNamara"
+		  },
+		  {
+		    "Name": "Jesus Bernabe"
+		  },
+		  {
+		    "Name": "Latikiya McNeely"
+		  },
+		  {
+		    "Name": "Antonio J. Lopez"
+		  },
+		  {
+		    "Name": "Jabari Feazell"
+		  },
+		  {
+		    "Name": "Narcisco J. Ledesma"
+		  },
+		  {
+		    "Name": "Levon S. Averhart"
+		  },
+		  {
+		    "Name": "Emmanuel D, Childs Fleming"
+		  },
+		  {
+		    "Name": "Michael Swift"
+		  },
+		  {
+		    "Name": "Celeste Cockriel"
+		  },
+		  {
+		    "Name": "Demica Porter"
+		  },
+		  {
+		    "Name": "Rakeem Simmons"
+		  },
+		  {
+		    "Name": "Javier Pantoja"
+		  },
+		  {
+		    "Name": "Stefan Slater"
+		  },
+		  {
+		    "Name": "Robert L. Thornton"
+		  },
+		  {
+		    "Name": "Kejuan Thomas"
+		  },
+		  {
+		    "Name": "Victor Davila"
+		  },
+		  {
+		    "Name": "Levell M. Moore"
+		  },
+		  {
+		    "Name": "Kenneth Williams"
+		  },
+		  {
+		    "Name": "Jose Carlos Romero Hernandez"
+		  },
+		  {
+		    "Name": "Cornell Verner"
+		  },
+		  {
+		    "Name": "Jerrell J. Perkins"
+		  },
+		  {
+		    "Name": "Damien Rowden"
+		  },
+		  {
+		    "Name": "Aaron Clemons"
+		  },
+		  {
+		    "Name": "Quinten Tucker"
+		  },
+		  {
+		    "Name": "Benjamin Robles"
+		  },
+		  {
+		    "Name": "Remus Campbell"
+		  },
+		  {
+		    "Name": "Kolby Craig"
+		  },
+		  {
+		    "Name": "Charles Macklin"
+		  },
+		  {
+		    "Name": "Calvin Robinson"
+		  },
+		  {
+		    "Name": "Laquesha L. Holmes"
+		  },
+		  {
+		    "Name": "Joaquin Clara"
+		  },
+		  {
+		    "Name": "Matthias Bowen"
+		  },
+		  {
+		    "Name": "Theotis Luckett"
+		  },
+		  {
+		    "Name": "Adrian Lopez"
+		  },
+		  {
+		    "Name": "Brandon Cathey"
+		  },
+		  {
+		    "Name": "Derrick Nabors"
+		  },
+		  {
+		    "Name": "Gerard Mayo"
+		  },
+		  {
+		    "Name": "Arthur Sanchez"
+		  },
+		  {
+		    "Name": "Joshua Bates"
+		  },
+		  {
+		    "Name": "John Smith"
+		  },
+		  {
+		    "Name": "Monticello Scott"
+		  },
+		  {
+		    "Name": "Jermaine Jones"
+		  },
+		  {
+		    "Name": "James McChristian"
+		  },
+		  {
+		    "Name": "Mario Battles"
+		  },
+		  {
+		    "Name": "Jeremy Tang"
+		  },
+		  {
+		    "Name": "Felipe Bautista Jr."
+		  },
+		  {
+		    "Name": "Antwon Green"
+		  },
+		  {
+		    "Name": "Gregory McDaniels"
+		  },
+		  {
+		    "Name": "Ashley Shanta-Nicole Harrison"
+		  },
+		  {
+		    "Name": "Melvin James Jr."
+		  },
+		  {
+		    "Name": "James Posey"
+		  },
+		  {
+		    "Name": "Erick L. Charles Jr."
+		  },
+		  {
+		    "Name": "Terrence Johnson"
+		  },
+		  {
+		    "Name": "Patrick Thompson"
+		  },
+		  {
+		    "Name": "Carlos Cortez"
+		  },
+		  {
+		    "Name": "Tyson White"
+		  },
+		  {
+		    "Name": "Jacquell Mosley"
+		  },
+		  {
+		    "Name": "Dominic Morris"
+		  },
+		  {
+		    "Name": "Juan Flores"
+		  },
+		  {
+		    "Name": "Steven Reid"
+		  },
+		  {
+		    "Name": "Antonio Monteza"
+		  },
+		  {
+		    "Name": "Angelo Terrell"
+		  },
+		  {
+		    "Name": "Isaac Hughes-Allen"
+		  },
+		  {
+		    "Name": "Jawon Garrett"
+		  },
+		  {
+		    "Name": "Dantrell Morgan"
+		  },
+		  {
+		    "Name": "Michelle A. Cano"
+		  },
+		  {
+		    "Name": "Micah Brown"
+		  },
+		  {
+		    "Name": "Joel Sandoval"
+		  },
+		  {
+		    "Name": "Miguel Sandoval"
+		  },
+		  {
+		    "Name": "Ida Arvizu"
+		  },
+		  {
+		    "Name": "Maurice King, Jr."
+		  },
+		  {
+		    "Name": "Darrius Buckley"
+		  },
+		  {
+		    "Name": "Juan Bahena Jr."
+		  },
+		  {
+		    "Name": "Anthony White"
+		  },
+		  {
+		    "Name": "Jesse A. Bennett"
+		  },
+		  {
+		    "Name": "John Bolden"
+		  },
+		  {
+		    "Name": "Catherine Barnett"
+		  },
+		  {
+		    "Name": "Joshua Rayborn"
+		  },
+		  {
+		    "Name": "Issac Harper"
+		  },
+		  {
+		    "Name": "Manuel J. Hernandez"
+		  },
+		  {
+		    "Name": "Perry L. Stroger"
+		  },
+		  {
+		    "Name": "Donzell L. Brewster"
+		  },
+		  {
+		    "Name": "Guy Lopez"
+		  },
+		  {
+		    "Name": "Darius Edwards"
+		  },
+		  {
+		    "Name": "Andrew Dehart"
+		  },
+		  {
+		    "Name": "Dashawn Townes"
+		  },
+		  {
+		    "Name": "Michael D. Hickingbottom"
+		  },
+		  {
+		    "Name": "Anthony Oliver"
+		  },
+		  {
+		    "Name": "Terry Barry"
+		  },
+		  {
+		    "Name": "Christopher Hardrick"
+		  },
+		  {
+		    "Name": "Tony Goodrich"
+		  },
+		  {
+		    "Name": "Marques Lewis"
+		  },
+		  {
+		    "Name": "Fred Anderson"
+		  },
+		  {
+		    "Name": "Juan Vargas"
+		  },
+		  {
+		    "Name": "Terrence Carter"
+		  },
+		  {
+		    "Name": "Gregory Petty"
+		  },
+		  {
+		    "Name": "David Lucious"
+		  },
+		  {
+		    "Name": "Michael Hillard"
+		  },
+		  {
+		    "Name": "Jenae Lemon"
+		  },
+		  {
+		    "Name": "Charnella Lemon"
+		  },
+		  {
+		    "Name": "Jose Rico"
+		  },
+		  {
+		    "Name": "Tommie L. Jones"
+		  },
+		  {
+		    "Name": "Lloyd Westbrook"
+		  },
+		  {
+		    "Name": "Anthony Henry"
+		  },
+		  {
+		    "Name": "James Patrick Stegmueller"
+		  },
+		  {
+		    "Name": "Antonio Moore"
+		  },
+		  {
+		    "Name": "Brian Keith Cheek"
+		  },
+		  {
+		    "Name": "Pleasure Cardell Singleton Jr."
+		  },
+		  {
+		    "Name": "Semaj Berry"
+		  },
+		  {
+		    "Name": "Ian Ashford"
+		  },
+		  {
+		    "Name": "Adonis Johnson"
+		  },
+		  {
+		    "Name": "Reynaldo Trevino"
+		  },
+		  {
+		    "Name": "Manuel Mendoza"
+		  },
+		  {
+		    "Name": "Alexis Ceron-Salgado"
+		  },
+		  {
+		    "Name": "Toriella Turpin"
+		  },
+		  {
+		    "Name": "Oscar Carter"
+		  },
+		  {
+		    "Name": "Joshua Williams"
+		  },
+		  {
+		    "Name": "Adam Furtick"
+		  },
+		  {
+		    "Name": "Shun F. Goodwin"
+		  },
+		  {
+		    "Name": "Marshall Carter"
+		  },
+		  {
+		    "Name": "Deylion L. Spencer"
+		  },
+		  {
+		    "Name": "Dionysus M. English Jr."
+		  },
+		  {
+		    "Name": "Andres Pina"
+		  },
+		  {
+		    "Name": "Silvestre Duarte"
+		  },
+		  {
+		    "Name": "Sharrod Peoples"
+		  },
+		  {
+		    "Name": "Victor M. Carrillo"
+		  },
+		  {
+		    "Name": "Cynthia Trevillion"
+		  },
+		  {
+		    "Name": "Trevail Ridgell"
+		  },
+		  {
+		    "Name": "Justin Gilbert"
+		  },
+		  {
+		    "Name": "Valentino Cockerman"
+		  },
+		  {
+		    "Name": "Devon Caffie"
+		  },
+		  {
+		    "Name": "Reno Wooldridge"
+		  },
+		  {
+		    "Name": "Simone McKay"
+		  },
+		  {
+		    "Name": "Terrence Lipsey"
+		  },
+		  {
+		    "Name": "Rodney Wilson"
+		  },
+		  {
+		    "Name": "Edward Duling"
+		  },
+		  {
+		    "Name": "O'Hage Stewart"
+		  },
+		  {
+		    "Name": "Antonio Barrett"
+		  },
+		  {
+		    "Name": "Lydell Wilson"
+		  },
+		  {
+		    "Name": "Stephen McCray"
+		  },
+		  {
+		    "Name": "Elizabeth Kennedy"
+		  },
+		  {
+		    "Name": "Eduardo Pena"
+		  },
+		  {
+		    "Name": "Lonnell Holmes"
+		  },
+		  {
+		    "Name": "Johnson Liggins"
+		  },
+		  {
+		    "Name": "Robert Ward"
+		  },
+		  {
+		    "Name": "Tremell Stornes"
+		  },
+		  {
+		    "Name": "Jeyson Gonzalez"
+		  },
+		  {
+		    "Name": "Darnell Mitchell"
+		  },
+		  {
+		    "Name": "Jose Saraseume"
+		  },
+		  {
+		    "Name": "Lonnie Hartman"
+		  },
+		  {
+		    "Name": "Kenta Holifield"
+		  },
+		  {
+		    "Name": "Robert Gant"
+		  },
+		  {
+		    "Name": "Nadia Manjarrez"
+		  },
+		  {
+		    "Name": "Eshunte Mayfield"
+		  },
+		  {
+		    "Name": "Herbert Rohloff"
+		  },
+		  {
+		    "Name": "Joseph Gates"
+		  },
+		  {
+		    "Name": "Tracy White"
+		  },
+		  {
+		    "Name": "Harold Stewart"
+		  },
+		  {
+		    "Name": "Jeromee Russell"
+		  },
+		  {
+		    "Name": "Steven Wheeler"
+		  },
+		  {
+		    "Name": "Sauvignon Watkins"
+		  },
+		  {
+		    "Name": "Rahsaan Adams"
+		  },
+		  {
+		    "Name": "Juan Serrano"
+		  },
+		  {
+		    "Name": "Pamela Enge"
+		  },
+		  {
+		    "Name": "Alonte Barber"
+		  },
+		  {
+		    "Name": "Ronald T. James"
+		  },
+		  {
+		    "Name": "Paris Thompson"
+		  },
+		  {
+		    "Name": "Armando Reyes"
+		  },
+		  {
+		    "Name": "Michael R. Evans"
+		  },
+		  {
+		    "Name": "Ramon Williams"
+		  },
+		  {
+		    "Name": "Exavian Davis"
+		  },
+		  {
+		    "Name": "Angel Rosario"
+		  },
+		  {
+		    "Name": "Alejandro Arellano"
+		  },
+		  {
+		    "Name": "Deshawn Johnson"
+		  },
+		  {
+		    "Name": "Devon Thomas"
+		  },
+		  {
+		    "Name": "Trevonte Howard"
+		  },
+		  {
+		    "Name": "Miguel Ford"
+		  },
+		  {
+		    "Name": "Charlie Lawrence"
+		  },
+		  {
+		    "Name": "Isiah H. High"
+		  },
+		  {
+		    "Name": "Tradon D. Sanders"
+		  },
+		  {
+		    "Name": "Eric Thomas"
+		  },
+		  {
+		    "Name": "Moncreef Miller"
+		  },
+		  {
+		    "Name": "Manuel Godinez"
+		  },
+		  {
+		    "Name": "Shurron Hawkins"
+		  },
+		  {
+		    "Name": "Corey Underwood"
+		  },
+		  {
+		    "Name": "Juan Martinez"
+		  },
+		  {
+		    "Name": "Lesean King"
+		  },
+		  {
+		    "Name": "Keayon Brooks"
+		  },
+		  {
+		    "Name": "George Parker"
+		  },
+		  {
+		    "Name": "Romell Durr"
+		  },
+		  {
+		    "Name": "Earron Moore"
+		  },
+		  {
+		    "Name": "Jonathan Gavina"
+		  },
+		  {
+		    "Name": "Frank Noto"
+		  },
+		  {
+		    "Name": "Anthony Johnson"
+		  },
+		  {
+		    "Name": "Jermaine Marshall"
+		  },
+		  {
+		    "Name": "Frankie Baez"
+		  },
+		  {
+		    "Name": "Lakiya Iman"
+		  },
+		  {
+		    "Name": "Jasmin Chacon-Chavez"
+		  },
+		  {
+		    "Name": "Brian Jasso"
+		  },
+		  {
+		    "Name": "Jermin Beganovic"
+		  },
+		  {
+		    "Name": "Tyrell Smith"
+		  },
+		  {
+		    "Name": "Benjamin Soto Ramirez"
+		  },
+		  {
+		    "Name": "Rakeem Randle"
+		  },
+		  {
+		    "Name": "Demetrius Barber"
+		  },
+		  {
+		    "Name": "Jonathan Fearcy"
+		  },
+		  {
+		    "Name": "Corey Warner"
+		  },
+		  {
+		    "Name": "Janaria Moore"
+		  },
+		  {
+		    "Name": "Kishaun Mobley"
+		  },
+		  {
+		    "Name": "Jerry Minard"
+		  },
+		  {
+		    "Name": "Ismail Abdulle"
+		  },
+		  {
+		    "Name": "Corey Haggard"
+		  },
+		  {
+		    "Name": "Albert Abu"
+		  },
+		  {
+		    "Name": "Brandy Rogers"
+		  },
+		  {
+		    "Name": "Anthony Tripp"
+		  },
+		  {
+		    "Name": "Parrish Dorjan"
+		  },
+		  {
+		    "Name": "Elrich White"
+		  },
+		  {
+		    "Name": "Neftali Reyes"
+		  }
+		]
+
+		function start() {
+			PeopleAudio = document.getElementById("cityA");
+			GunAudio = document.getElementById("gunA");
+			GunAudio.volume = 0.0;
+			frontSource = document.getElementById("background");
+		}
+
+
+		var x = setInterval(function(){ startGunShots() }, 10000); //20000
+
+		function precisionRound(number, precision) {
+		  var factor = Math.pow(10, precision);
+		  return Math.round(number * factor) / factor;
+		}
+
+		function startGunShots() {
+			clearInterval(x);
+			setInterval(function(){increaseGunShotVolume(); transition(); playGunShot();},2000);
+		}
+
+		function increaseGunShotVolume() {
+			if(PeopleVol > 0) {
+				PeopleVol = precisionRound(PeopleVol - 0.1,1);
+				console.log(PeopleVol);
+				PeopleAudio.volume = PeopleVol;
+			}
+			if(GunVol < 1) {
+				GunVol = precisionRound(GunVol + 0.1,1);
+				GunAudio.volume = GunVol;
+			}
+		}
+
+		function transition() {
+
+			if(frontO != 0) {
+				frontO = frontO - 0.1;
+				frontSource.style.opacity = frontO;
+			}else{
+				// document.getElementById("background").style.display.none;
+			}
+		}
+
+		function displayNames() {
+			document.getElementById("namesList").innerHTML = document.getElementById("namesList").innerHTML + "<br><del>" +names[pos].Name + "</del>";
+			pos = pos + 1;
+		}
+
+		function playGunShot() {
+			GunAudio.play();
+			displayNames();
+		}
+
+	</script>
+</head>
+
+<body onload="start()" class="crt">
+	
+	<div id="background" class="bg">
+		<center>
+		<div class="head">
+		<h1> Chicago - The Windy City </h1>
+		</div>
+		<div class="box">
+			Chicago, on Lake Michigan in Illinois, is among the largest cities in the U.S. Famed for its bold architecture, it has a skyline punctuated by skyscrapers such as the iconic John Hancock Center, 1,451-ft. Willis Tower (formerly the Sears Tower) and the neo-Gothic Tribune Tower. The city is also renowned for its museums, including the Art Institute of Chicago with its noted Impressionist and Post-Impressionist works.
+		</div>
+		</center>
+		<audio id="cityA" autoplay loop>
+		  <source src="crowd.mp3" type="audio/mpeg">
+		</audio>
+		<audio id="gunA" >
+		  <source src="gun.mp3" type="audio/mpeg">
+		</audio>
+	</div>
+	<div id="namesList" class="name"></div>	
+</body>
+</html>
