@@ -152,34 +152,59 @@ function killSlider() {
 }
 
 function runningScreen1() {
+  secOption.show();
+
   firstOption.removeClass("whiteClass")
   killSlider();
   title.html("Something is chasing you. Just run don't look back you don't have time.");
   firstOption.html("RUN");
+  secOption.html("RUN");
   firstOption.mousePressed(flipSound);
   firstOption.mouseReleased(runningScreen2);
+  secOption.mousePressed(flipSound);
+  secOption.mouseReleased(runningScreen2);
 }
 function runningScreen2() {
+  thirdOption = createA("#", "GAINING ON YOU");
+
   title.html("You can see your car, it's about fifty feet away. The footsteps get louder.");
   firstOption.html("RUN");
+  thirdOption.html("GAINING ON YOU")
   firstOption.mousePressed(flipSound);
   firstOption.mouseReleased(runningScreen3);
+  secOption.mousePressed(flipSound);
+  secOption.mouseReleased(runningScreen3);
+  thirdOption.mousePressed(flipSound);
+  thirdOption.mouseReleased(runningScreen3);
 }
 function runningScreen3() {
   title.html("You can see your car, it's almost within your grasp. The footsteps KEEP GETTING LOUDER.");
   firstOption.html("RUN");
+  secOption.html("JUMP FOR IT");
+  thirdOption.html("SPRINT")
   firstOption.mousePressed(flipSound);
   firstOption.mouseReleased(runningScreen4);
+  secOption.mousePressed(flipSound);
+  secOption.mouseReleased(runningScreen4);
+  thirdOption.mousePressed(flipSound);
+  thirdOption.mouseReleased(runningScreen4);
 }
 function runningScreen4() {
   title.html("I T ' S  R I G H T  B E H I N D  Y O U'");
   firstOption.html("RUNRUNRUNRUNRUNRUNRUN");
+  secOption.html("TOOLATETOOLATETOOLATETOOLATETOOLATE");
+  thirdOption.html("RUNRUNRUNRUNRUNRUNRUNRUNRUNRUN")
   firstOption.mousePressed(flipSound);
   firstOption.mouseReleased(gameOver);
+  secOption.mousePressed(flipSound);
+  secOption.mouseReleased(gameOver);
+  thirdOption.mousePressed(flipSound);
+  thirdOption.mouseReleased(gameOver);
 }
 function gameOver() {
   firstOption.hide();
-
+  secOption.hide();
+  thirdOption.hide();
   gameOverTrue = true;
 
 	title.html("You were never heard from again");
